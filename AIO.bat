@@ -474,11 +474,17 @@ if exist "CakesForeveryWan" (
     git clone --recursive https://github.com/mid-kid/CakesForeveryWan.git
     cd CakesForeveryWan
 )
+cls
+echo - Go inside [CakesForeveryWan] folder.
+echo - Edit [Makefile] with notepad.
+echo - Find this line: [PYTHON := python3] and change it to [PYTHON := py -3]
+echo - Save it, then press any button to continue in this program.
+Pause >nul
 echo Building...
 Title = Building Cakes ^(Clean^)...
 make clean
 Title = Building Cakes ^(Release^)...
-make
+make release
 Title = Building Cakes ^(Done^)
 echo.
 echo #####################################################
