@@ -91,14 +91,16 @@ ECHO H - Build EmuNAND9UI
 ECHO I - Build FBI
 ECHO J - Build FTPD
 ECHO K - Build GodMode9
-ECHO L - Build OTPHelper
-ECHO M - Return to Main Menu
-ECHO N - EXIT Program
+ECHO L - Build JK's Save Manager
+ECHO M - Build OTPHelper
+ECHO N - Return to Main Menu
+ECHO O - EXIT Program
 ECHO.
-choice /C ABCDEFGHIJKLMN /M "Enter the letter of your choice:"
-IF ERRORLEVEL 14 exit
-IF ERRORLEVEL 13 GOTO TYPE
-IF ERRORLEVEL 12 GOTO OTPH
+choice /C ABCDEFGHIJKLMNO /M "Enter the letter of your choice:"
+IF ERRORLEVEL 15 exit
+IF ERRORLEVEL 14 GOTO TYPE
+IF ERRORLEVEL 13 GOTO OTPH
+IF ERRORLEVEL 12 GOTO JKSM
 IF ERRORLEVEL 11 GOTO GM9
 IF ERRORLEVEL 10 GOTO FTPD
 IF ERRORLEVEL 9 GOTO FBI
@@ -122,12 +124,16 @@ ECHO A - Build Citro3D
 ECHO B - Build Citrus
 ECHO C - Build Libctru
 ECHO D - Build Portlibs
-ECHO E - Return to Main Menu
-ECHO F - EXIT Program
+ECHO E - Build Sf2dlib
+ECHO F - Build Sftdlib
+ECHO G - Return to Main Menu
+ECHO H - EXIT Program
 ECHO.
-choice /C ABCDEF /M "Enter the letter of your choice:"
-IF ERRORLEVEL 6 exit
-IF ERRORLEVEL 5 GOTO TYPE
+choice /C ABCDEFGH /M "Enter the letter of your choice:"
+IF ERRORLEVEL 8 exit
+IF ERRORLEVEL 7 GOTO TYPE
+IF ERRORLEVEL 6 GOTO SFTDLIB
+IF ERRORLEVEL 5 GOTO SF2DLIB
 IF ERRORLEVEL 4 GOTO PORTLIB
 IF ERRORLEVEL 3 GOTO LCTRU
 IF ERRORLEVEL 2 GOTO CITRUS
@@ -1246,6 +1252,37 @@ echo Done. Files are in the "GodMode9/release" folder. && echo Press any key to 
 Pause >nul
 GOTO END
 
+:JKSM
+cls
+Title = Building JKSM...
+if exist "JKSM" (
+	echo Making a backup of your current JKSM folder
+	xcopy "JKSM\*" "Backups_Compiles\Backup_JKSM" /e /i /y >nul
+    cd JKSM
+    Title = Building JKSM ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building JKSM ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/J-D-K/JKSM.git
+    cd JKSM
+)
+echo Building...
+Title = Building JKSM ^(Clean^)...
+make clean
+Title = Building JKSM ^(Release^)...
+make cia
+Title = Building JKSM ^(Done^)
+echo.
+echo #################################################
+color A
+cd ..
+echo Done. Files are in the "JKSM" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
 :OTPH
 cls
 Title = Building OTPHelper...
@@ -1644,12 +1681,34 @@ GOTO END
 :PORTLIB
 cls
 Title = Building Portlibs...
+ECHO ..........................................
+ECHO . Portlibs LIB Menu. Please select a lib .
+ECHO ..........................................
+ECHO.
+ECHO A - Zlib
+ECHO B - FreeType2
+ECHO C - LibPNG
+ECHO D - Return to LIBs Menu
+ECHO E - Return to Main Menu
+ECHO F - EXIT Program
+ECHO.
+choice /C ABCDEF /M "Enter the letter of your choice:"
+IF ERRORLEVEL 6 exit
+IF ERRORLEVEL 5 GOTO TYPE
+IF ERRORLEVEL 4 GOTO LIBS
+IF ERRORLEVEL 3 GOTO LIBPNG
+IF ERRORLEVEL 2 GOTO FREETYPE
+IF ERRORLEVEL 1 GOTO ZLIB
+
+:ZLIB
+cls
+Title = Building Portlibs...
 ECHO ..............................................................
 ECHO . Portlibs LIB Menu. Do you want to install or compile only? .
 ECHO ..............................................................
 ECHO.
-ECHO A - Install Portlibs
-ECHO B - Compile Portlibs
+ECHO A - Install Zlib
+ECHO B - Compile Zlib
 ECHO C - Return to LIBs Menu
 ECHO D - Return to Main Menu
 ECHO E - EXIT Program
@@ -1658,67 +1717,397 @@ choice /C ABCDE /M "Enter the letter of your choice:"
 IF ERRORLEVEL 5 exit
 IF ERRORLEVEL 4 GOTO TYPE
 IF ERRORLEVEL 3 GOTO LIBS
-IF ERRORLEVEL 2 GOTO PORTCOMP
-IF ERRORLEVEL 1 GOTO PORTINST
+IF ERRORLEVEL 2 GOTO ZLIBCOMP
+IF ERRORLEVEL 1 GOTO ZLIBINST
 
-:PORTINST
+:FREETYPE
+cls
+Title = Building Portlibs...
+ECHO ..............................................................
+ECHO . Portlibs LIB Menu. Do you want to install or compile only? .
+ECHO ..............................................................
+ECHO.
+ECHO A - Install FreeType2
+ECHO B - Compile FreeTyp2
+ECHO C - Return to LIBs Menu
+ECHO D - Return to Main Menu
+ECHO E - EXIT Program
+ECHO.
+choice /C ABCDE /M "Enter the letter of your choice:"
+IF ERRORLEVEL 5 exit
+IF ERRORLEVEL 4 GOTO TYPE
+IF ERRORLEVEL 3 GOTO LIBS
+IF ERRORLEVEL 2 GOTO FREETYPECOMP
+IF ERRORLEVEL 1 GOTO FREETYPEINST
+
+:LIBPNG
+cls
+Title = Building Portlibs...
+ECHO ..............................................................
+ECHO . Portlibs LIB Menu. Do you want to install or compile only? .
+ECHO ..............................................................
+ECHO.
+ECHO A - Install LibPNG
+ECHO B - Compile LibPNG
+ECHO C - Return to LIBs Menu
+ECHO D - Return to Main Menu
+ECHO E - EXIT Program
+ECHO.
+choice /C ABCDE /M "Enter the letter of your choice:"
+IF ERRORLEVEL 5 exit
+IF ERRORLEVEL 4 GOTO TYPE
+IF ERRORLEVEL 3 GOTO LIBS
+IF ERRORLEVEL 2 GOTO LIBPNGCOMP
+IF ERRORLEVEL 1 GOTO LIBPNGINST
+
+:ZLIBINST
 cls
 if exist "3ds_portlibs" (
 	echo Making a backup of your current Portlibs source folder
 	xcopy "3ds_portlibs\*" "Backups_Compiles\Backup_3ds_portlibs" /e /i /y >nul
 	cd 3ds_portlibs
-    Title = Building Portlibs ^(Update^)...
+    Title = Building Portlibs-zlib ^(Update^)...
     echo Updating repo...
     git pull origin master
     git submodule update --init --recursive
 ) else (
-    Title = Building Portlibs ^(Clone^)...
+    Title = Building Portlibs-zlib ^(Clone^)...
     echo Cloning repo...
     git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
     cd 3ds_portlibs
 )
 echo Building...
-Title = Building Portlibs ^(Clean^)...
+Title = Building Portlibs-zlib ^(Clean^)...
 make clean
-Title = Building Portlibs ^(Release^)...
+Title = Building Portlibs-zlib ^(Release^)...
 make zlib
 make install-zlib
-Title = Building Portlibs ^(Done^)
+Title = Building Portlibs-zlib ^(Done^)
 echo.
-echo ##################################################################
+echo #######################################################################
 color A
 cd ..
-echo Done. Portlibs is installed in the "c:/devkitpro/portlibs" folder. && echo Press any key to continue ...
+echo Done. Portlibs-zlib is installed in the "c:/devkitpro/portlibs" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
-:PORTCOMP
+:ZLIBCOMP
 cls
 if exist "3ds_portlibs" (
 	echo Making a backup of your current Portlibs source folder
 	xcopy "3ds_portlibs\*" "Backups_Compiles\Backup_3ds_portlibs" /e /i /y >nul
 	cd 3ds_portlibs
-    Title = Building Portlibs ^(Update^)...
+    Title = Building Portlibs-zlib ^(Update^)...
     echo Updating repo...
     git pull origin master
     git submodule update --init --recursive
 ) else (
-    Title = Building Portlibs ^(Clone^)...
+    Title = Building Portlibs-zlib ^(Clone^)...
     echo Cloning repo...
     git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
     cd 3ds_portlibs
 )
 echo Building...
-Title = Building Portlibs ^(Clean^)...
+Title = Building Portlibs-Zlib ^(Clean^)...
 make clean
-Title = Building Portlibs ^(Release^)...
+Title = Building Portlibs-zlib ^(Release^)...
 make zlib
-Title = Building Portlibs ^(Done^)
+Title = Building Portlibs-zlib ^(Done^)
 echo.
 echo #############################################
 color A
 cd ..
 echo Done. Files are in the "3ds_portlibs" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:FREETYPEINST
+cls
+if exist "3ds_portlibs" (
+	echo Making a backup of your current Portlibs source folder
+	xcopy "3ds_portlibs\*" "Backups_Compiles\Backup_3ds_portlibs" /e /i /y >nul
+	cd 3ds_portlibs
+    Title = Building Portlibs-FreeType2 ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building Portlibs-FreeType2 ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
+    cd 3ds_portlibs
+)
+echo Building...
+Title = Building Portlibs-FreeType2 ^(Clean^)...
+make clean
+Title = Building Portlibs-FreeType2 ^(Release^)...
+make freetype
+make install
+Title = Building Portlibs-FreeType2 ^(Done^)
+echo.
+echo ############################################################################
+color A
+cd ..
+echo Done. Portlibs-FreeType2 is installed in the "c:/devkitpro/portlibs" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:FREETYPECOMP
+cls
+if exist "3ds_portlibs" (
+	echo Making a backup of your current Portlibs source folder
+	xcopy "3ds_portlibs\*" "Backups_Compiles\Backup_3ds_portlibs" /e /i /y >nul
+	cd 3ds_portlibs
+    Title = Building Portlibs-FreeType2 ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building Portlibs-FreeType2 ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
+    cd 3ds_portlibs
+)
+echo Building...
+Title = Building Portlibs-FreeType2 ^(Clean^)...
+make clean
+Title = Building Portlibs-FreeType2 ^(Release^)...
+make freetype
+Title = Building Portlibs-FreeType2 ^(Done^)
+echo.
+echo #############################################
+color A
+cd ..
+echo Done. Files are in the "3ds_portlibs" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:LIBPNGINST
+cls
+if exist "3ds_portlibs" (
+	echo Making a backup of your current Portlibs source folder
+	xcopy "3ds_portlibs\*" "Backups_Compiles\Backup_3ds_portlibs" /e /i /y >nul
+	cd 3ds_portlibs
+    Title = Building Portlibs-LibPNG ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building Portlibs-LibPNG ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
+    cd 3ds_portlibs
+)
+echo Building...
+Title = Building Portlibs-LibPNG ^(Clean^)...
+make clean
+Title = Building Portlibs-LibPNG ^(Release^)...
+make libpng
+make install
+Title = Building Portlibs-LibPNG ^(Done^)
+echo.
+echo #########################################################################
+color A
+cd ..
+echo Done. Portlibs-LibPNG is installed in the "c:/devkitpro/portlibs" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:LIBPNGCOMP
+cls
+if exist "3ds_portlibs" (
+	echo Making a backup of your current Portlibs source folder
+	xcopy "3ds_portlibs\*" "Backups_Compiles\Backup_3ds_portlibs" /e /i /y >nul
+	cd 3ds_portlibs
+    Title = Building Portlibs-LibPNG ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building Portlibs-LibPNG ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
+    cd 3ds_portlibs
+)
+echo Building...
+Title = Building Portlibs-LibPNG ^(Clean^)...
+make clean
+Title = Building Portlibs-LibPNG ^(Release^)...
+make libpng
+Title = Building Portlibs-LibPNG ^(Done^)
+echo.
+echo #############################################
+color A
+cd ..
+echo Done. Files are in the "3ds_portlibs" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:SF2DLIB
+cls
+Title = Building sf2dlib...
+ECHO .........................................................
+ECHO . Libsf2d Menu. Do you want to install or compile only? .
+ECHO .........................................................
+ECHO.
+ECHO A - Install libsf2d
+ECHO B - Compile libsf2d
+ECHO C - Return to LIBs Menu
+ECHO D - Return to Main Menu
+ECHO E - EXIT Program
+ECHO.
+choice /C ABCDE /M "Enter the letter of your choice:"
+IF ERRORLEVEL 5 exit
+IF ERRORLEVEL 4 GOTO TYPE
+IF ERRORLEVEL 3 GOTO LIBS
+IF ERRORLEVEL 2 GOTO SF2DCOMP
+IF ERRORLEVEL 1 GOTO SF2DINST
+
+:SF2DINST
+cls
+if exist "sf2dlib" (
+	echo Making a backup of your current sf2dlib folder
+	xcopy "sf2dlib\*" "Backups_Compiles\Backup_sf2dlib" /e /i /y >nul
+    cd sf2dlib
+    Title = Building sf2dlib ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building sf2dlib ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/xerpi/sf2dlib.git
+    cd sf2dlib
+)
+cd libsf2d
+echo Building...
+Title = Building sf2dlib ^(Clean^)...
+make clean
+Title = Building sf2dlib ^(Release^)...
+make install
+Title = Building sf2dlib ^(Done^)
+echo.
+echo ################################################################
+color A
+cd ..
+cd ..
+echo Done. Sf2dlib is installed in the "c:/devkitpro/libctru" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:SF2DCOMP
+cls
+if exist "sf2dlib" (
+	echo Making a backup of your current sf2dlib folder
+	xcopy "sf2dlib\*" "Backups_Compiles\Backup_sf2dlib" /e /i /y >nul
+    cd sf2dlib
+    Title = Building sf2dlib ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building sf2dlib ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/xerpi/sf2dlib.git
+    cd sf2dlib
+)
+cd libsf2d
+echo Building...
+Title = Building sf2dlib ^(Clean^)...
+make clean
+Title = Building sf2dlib ^(Release^)...
+make
+Title = Building sf2dlib ^(Done^)
+echo.
+echo ############################################
+color A
+cd ..
+cd ..
+echo Done. Files are in "sf2dlib/libsf2d" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:SFTDLIB
+cls
+Title = Building sftdlib...
+ECHO .............................................................
+ECHO . sftdlib LIB Menu. Do you want to install or compile only? .
+ECHO .............................................................
+ECHO.
+ECHO A - Install sftdlib
+ECHO B - Compile sftdlib
+ECHO C - Return to LIBs Menu
+ECHO D - Return to Main Menu
+ECHO E - EXIT Program
+ECHO.
+choice /C ABCDE /M "Enter the letter of your choice:"
+IF ERRORLEVEL 5 exit
+IF ERRORLEVEL 4 GOTO TYPE
+IF ERRORLEVEL 3 GOTO LIBS
+IF ERRORLEVEL 2 GOTO SFTDCOMP
+IF ERRORLEVEL 1 GOTO SFTDINST
+
+:SFTDINST
+cls
+if exist "sftdlib" (
+    echo Making a backup of your current sftdlib source folder
+    xcopy "sftdlib\*" "Backups_Compiles\Backup_sftdlib" /e /i /y >nul
+    cd sftdlib
+    Title = Installing sftdlib ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Installing sftdlib ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/xerpi/sftdlib
+    cd sftdlib
+)
+cd libsftd
+echo Building...
+Title = Installing sftdlib ^(Clean^)...
+make clean
+Title = Installing sftdlib ^(Release^)...
+make install
+Title = Installing sftdlib ^(Done^)
+echo.
+echo ################################################################
+color A
+cd ..
+cd ..
+echo Done. sftdlib is installed in the "c:/devkitpro/libctru" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:SFTDCOMP
+cls
+if exist "sftdlib" (
+    echo Making a backup of your current sftdlib source folder
+    xcopy "sftdlib\*" "Backups_Compiles\Backup_sftdlib" /e /i /y >nul
+    cd sftdlib
+    Title = Installing sftdlib ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Installing sftdlib ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/xerpi/sftdlib
+    cd sftdlib
+)
+cd libsftd
+echo Building...
+Title = Installing sftdlib ^(Clean^)...
+make clean
+Title = Installing sftdlib ^(Release^)...
+make
+Title = Installing sftdlib ^(Done^)
+echo.
+echo ################################################################
+color A
+cd ..
+cd ..
+echo Done. Files are in the "sftdlib/libsftd" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
