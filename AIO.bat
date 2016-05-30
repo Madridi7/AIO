@@ -91,16 +91,20 @@ ECHO H - Build EmuNAND9UI
 ECHO I - Build FBI
 ECHO J - Build FTPD
 ECHO K - Build GodMode9
-ECHO L - Build JK's Save Manager
-ECHO M - Build OTPHelper
-ECHO N - Return to Main Menu
-ECHO O - EXIT Program
+ECHO L - Build Hourglass9
+ECHO M - Build JK's Save Manager
+ECHO N - Build OTPHelper
+ECHO O - Build TIKdevil
+ECHO P - Return to Main Menu
+ECHO Q - EXIT Program
 ECHO.
-choice /C ABCDEFGHIJKLMNO /M "Enter the letter of your choice:"
-IF ERRORLEVEL 15 exit
-IF ERRORLEVEL 14 GOTO TYPE
-IF ERRORLEVEL 13 GOTO OTPH
-IF ERRORLEVEL 12 GOTO JKSM
+choice /C ABCDEFGHIJKLMNOPQ /M "Enter the letter of your choice:"
+IF ERRORLEVEL 17 exit
+IF ERRORLEVEL 16 GOTO TYPE
+IF ERRORLEVEL 15 GOTO TIK
+IF ERRORLEVEL 14 GOTO OTPH
+IF ERRORLEVEL 13 GOTO JKSM
+IF ERRORLEVEL 12 GOTO HG9
 IF ERRORLEVEL 11 GOTO GM9
 IF ERRORLEVEL 10 GOTO FTPD
 IF ERRORLEVEL 9 GOTO FBI
@@ -900,9 +904,6 @@ if exist "A9NC" (
     git clone --recursive https://github.com/d0k3/A9NC.git
     cd A9NC
 )
-Title = Updating Buildtools
-rmdir buildtools /s /q
-git clone --recursive https://github.com/Steveice10/buildtools.git
 echo Building...
 Title = Building A9NC ^(Clean^)...
 make clean
@@ -975,9 +976,6 @@ if exist "CIAngel" (
     git clone --recursive https://github.com/llakssz/CIAngel.git
     cd CIAngel
 )
-Title = Updating Buildtools
-rmdir buildtools /s /q
-git clone --recursive https://github.com/Steveice10/buildtools.git
 echo Building...
 Title = Building CIAngel ^(Clean^)...
 make clean
@@ -1009,9 +1007,6 @@ if exist "CTRXplorer" (
     git clone --recursive https://github.com/d0k3/CTRXplorer.git
     cd CTRXplorer
 )
-Title = Updating Buildtools
-rmdir buildtools /s /q
-git clone --recursive https://github.com/Steveice10/buildtools.git
 echo Building...
 Title = Building CTRXplorer ^(Clean^)...
 make clean
@@ -1252,6 +1247,37 @@ echo Done. Files are in the "GodMode9/release" folder. && echo Press any key to 
 Pause >nul
 GOTO END
 
+:HG9
+cls
+Title = Building Hourglass9...
+if exist "Hourglass9" (
+	echo Making a backup of your current Hourglass9 folder
+	xcopy "Hourglass9\*" "Backups_Compiles\Backup_Hourglass9" /e /i /y >nul
+    cd Hourglass9
+    Title = Building Hourglass9 ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building Hourglass9 ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/d0k3/Hourglass9.git
+    cd Hourglass9
+)
+echo Building...
+Title = Building Hourglass9 ^(Clean^)...
+make clean
+Title = Building Hourglass9 ^(Release^)...
+make release
+Title = Building Hourglass9 ^(Done^)
+echo.
+echo #################################################
+color A
+cd ..
+echo Done. Files are in the "Hourglass9/release" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
 :JKSM
 cls
 Title = Building JKSM...
@@ -1311,6 +1337,37 @@ echo ##################################################
 color A
 cd ..
 echo Done. Files are in the "OTPHelper/release" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:TIK
+cls
+Title = Building TIKdevil...
+if exist "TIKdevil" (
+	echo Making a backup of your current TIKdevil folder
+	xcopy "TIKdevil\*" "Backups_Compiles\Backup_TIKdevil" /e /i /y >nul
+    cd TIKdevil
+    Title = Building TIKdevil ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building TIKdevil ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/mmcx125/TIKdevil.git
+    cd TIKdevil
+)
+echo Building...
+Title = Building TIKdevil ^(Clean^)...
+make clean
+Title = Building TIKdevil ^(Release^)...
+make
+Title = Building TIKdevil ^(Done^)
+echo.
+echo #################################################
+color A
+cd ..
+echo Done. Files are in the "TIKdevil/output" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
