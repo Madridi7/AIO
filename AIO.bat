@@ -276,9 +276,15 @@ if exist "BootCtr9" (
     echo Cloning repo...
     git clone --recursive https://github.com/hartmannaf/BootCtr9.git
     cd BootCtr9
-	mkdir bootloader\data
+	Title = Building Pack_tool.exe ...
+	cd common
+	cd pack_tool_src
+	make
+	cd ..
+	cd ..
 )
 :A9FCHECK1
+Title = Building arm9loaderhax ^(Requirements^)...
 cls
 echo Please copy the following files to BootCtr9/data_input folder: && echo [new3ds10.firm] && echo [new3ds90.firm] && echo [secret_sector.bin] && echo [OTP.bin] && echo. && echo Press "Enter" to continue ...
 Pause >nul
@@ -348,8 +354,15 @@ if exist "Delebile-A9LH" (
     echo Cloning repo...
     git clone --recursive https://github.com/delebile/arm9loaderhax.git
     cd arm9loaderhax
+	Title = Building Pack_tool.exe ...
+	cd common
+	cd pack_tool_src
+	make
+	cd ..
+	cd ..
 )
 :A9FCHECK2
+Title = Building arm9loaderhax ^(Requirements^)...
 cls
 echo Please copy the following files to arm9loaderhax/data_input folder: && echo [new3ds10.firm] && echo [new3ds90.firm] && echo [secret_sector.bin] && echo [OTP.bin] && echo. && echo Press "Enter" to continue ...
 Pause >nul
