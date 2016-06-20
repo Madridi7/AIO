@@ -53,24 +53,26 @@ ECHO . Custom Firmware Build Menu. Choose a CFW to compile: .
 ECHO ........................................................
 ECHO.
 ECHO A - Build Cakes
-ECHO B - Build Cosmo3DS
-ECHO C - Build Luma3DS
-ECHO D - Build r3Tools
-ECHO E - Build ReiNAND
-ECHO F - Build rxTools
-ECHO G - Build SaltFW
-ECHO H - Return to Main Menu
-ECHO I - EXIT Program
+ECHO B - Build Corbenik
+ECHO C - Build Cosmo3DS
+ECHO D - Build Luma3DS
+ECHO E - Build r3Tools
+ECHO F - Build ReiNAND
+ECHO G - Build rxTools
+ECHO H - Build SaltFW
+ECHO I - Return to Main Menu
+ECHO J - EXIT Program
 ECHO.
-choice /C ABCDEFGHI /M "Enter the letter of your choice:"
-IF ERRORLEVEL 9 exit
-IF ERRORLEVEL 8 GOTO TYPE
-IF ERRORLEVEL 7 GOTO SALT
-IF ERRORLEVEL 6 GOTO RXT
-IF ERRORLEVEL 5 GOTO REI
-IF ERRORLEVEL 4 GOTO R3T
-IF ERRORLEVEL 3 GOTO LUMA
-IF ERRORLEVEL 2 GOTO COSMO
+choice /C ABCDEFGHIJ /M "Enter the letter of your choice:"
+IF ERRORLEVEL 10 exit
+IF ERRORLEVEL 9 GOTO TYPE
+IF ERRORLEVEL 8 GOTO SALT
+IF ERRORLEVEL 7 GOTO RXT
+IF ERRORLEVEL 6 GOTO REI
+IF ERRORLEVEL 5 GOTO R3T
+IF ERRORLEVEL 4 GOTO LUMA
+IF ERRORLEVEL 3 GOTO COSMO
+IF ERRORLEVEL 2 GOTO CORBE
 IF ERRORLEVEL 1 GOTO CAKES
 
 :HB
@@ -181,6 +183,7 @@ if exist "A9LH-AUR-init" (
     git clone --recursive https://github.com/AuroraWright/arm9loaderhax.git
     cd arm9loaderhax
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building A9LH-AUR-init ^(Clean^)...
 make clean
@@ -214,6 +217,7 @@ if exist "A9LH-AUR-noinit" (
     git clone --recursive https://github.com/AuroraWright/arm9loaderhax.git -b noscreeninit
     cd arm9loaderhax
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building A9LH-AUR-noinit ^(Clean^)...
 make clean
@@ -246,6 +250,7 @@ if exist "BootAnim9" (
     git clone --recursive https://github.com/Wolfvak/BootAnim9.git
     cd BootAnim9
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building BootAnim9 ^(Clean^)...
 make clean
@@ -276,12 +281,6 @@ if exist "BootCtr9" (
     echo Cloning repo...
     git clone --recursive https://github.com/hartmannaf/BootCtr9.git
     cd BootCtr9
-	Title = Building Pack_tool.exe ...
-	cd common
-	cd pack_tool_src
-	make
-	cd ..
-	cd ..
 )
 :A9FCHECK1
 Title = Building arm9loaderhax ^(Requirements^)...
@@ -322,6 +321,7 @@ echo OTP.bin doesn't exist. && echo Please copy [OTP.bin] to BootCtr9/data_input
 Pause >nul
 GOTO A9FCHECK1
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building BootCtr9 ^(Clean^)...
 make clean
@@ -354,12 +354,6 @@ if exist "Delebile-A9LH" (
     echo Cloning repo...
     git clone --recursive https://github.com/delebile/arm9loaderhax.git
     cd arm9loaderhax
-	Title = Building Pack_tool.exe ...
-	cd common
-	cd pack_tool_src
-	make
-	cd ..
-	cd ..
 )
 :A9FCHECK2
 Title = Building arm9loaderhax ^(Requirements^)...
@@ -400,6 +394,7 @@ echo OTP.bin doesn't exist. && echo Please copy [OTP.bin] to arm9loaderhax/data_
 Pause >nul
 GOTO A9FCHECK2
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building arm9loaderhax ^(Clean^)...
 make clean
@@ -434,6 +429,7 @@ if exist "Samus-A9LH" (
     git clone --recursive https://github.com/dark-samus/arm9loaderhax
     cd arm9loaderhax
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building arm9loaderhax ^(Clean^)...
 make clean
@@ -466,6 +462,7 @@ if exist "SafeA9LHInstaller" (
     git clone --recursive https://github.com/AuroraWright/SafeA9LHInstaller
     cd SafeA9LHInstaller
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building SafeA9LHInstaller ^(Clean^)...
 make clean
@@ -497,6 +494,7 @@ if exist "CakesForeveryWan" (
     git clone --recursive https://github.com/mid-kid/CakesForeveryWan.git
     cd CakesForeveryWan
 )
+set PATH=c:\Python3\;%PATH%
 echo Building...
 Title = Building Cakes ^(Clean^)...
 make clean
@@ -510,6 +508,38 @@ copy build\main.bin out\
 ren out\main.bin arm9loaderhax.bin
 cd ..
 echo Done. Files are in the "CakesForeveryWan/out" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:CORBE
+cls
+Title = Building corbenik...
+if exist "corbenik" (
+	echo Making a backup of your current corbenik folder
+	xcopy "corbenik\*" "Backups_Compiles\Backup_corbenik" /e /i /y >nul
+    cd corbenik
+    Title = Building corbenik ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building corbenik ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/chaoskagami/corbenik.git
+    cd corbenik
+)
+set PATH=c:\Python27\;%PATH%
+echo Building...
+Title = Building corbenik ^(Clean^)...
+make clean
+Title = Building corbenik ^(Release^)...
+make
+Title = Building corbenik ^(Done^)
+echo.
+echo #############################################
+color A
+cd ..
+echo Done. Files are in the "corbenik/out" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -530,6 +560,7 @@ if exist "Cosmo3DS" (
     git clone --recursive https://github.com/yifanlu/Cosmo3DS.git
     cd Cosmo3DS
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Cosmo3DS ^(Clean^)...
 make clean
@@ -582,6 +613,7 @@ if exist "Luma3DS-USER" (
     git clone --recursive https://github.com/AuroraWright/Luma3DS.git
     cd Luma3DS
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Luma3DS-USER ^(Clean^)...
 make clean
@@ -616,6 +648,7 @@ if exist "Luma3DS-DEV" (
     cd Luma3DS
     git checkout developer
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Luma3DS-DEV ^(Clean^)...
 make clean
@@ -648,6 +681,7 @@ if exist "r3Tools" (
     git clone --recursive https://github.com/173210/r3Tools.git
     cd r3Tools
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building r3Tools ^(Clean^)...
 make clean
@@ -700,6 +734,7 @@ if exist "ReiNand-O3DS" (
     git clone --recursive https://github.com/Reisyukaku/ReiNand.git
     cd ReiNand
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building ReiNand-O3DS ^(Clean^)...
 make clean
@@ -733,6 +768,7 @@ if exist "ReiNand-N3DS" (
     git clone --recursive https://github.com/Reisyukaku/ReiNand.git
     cd ReiNand
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building ReiNand-N3DS ^(Clean^)...
 make clean
@@ -788,6 +824,7 @@ if exist "rxTools-Main" (
     git clone --recursive https://github.com/roxas75/rxTools
     cd rxTools
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building rxTools-Main ^(Clean^)...
 make clean
@@ -821,6 +858,7 @@ if exist "rxTools-A9LH" (
     git clone --recursive https://github.com/roxas75/rxTools.git -b arm9loaderhax
     cd rxTools
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building rxTools-A9LH ^(Clean^)...
 make clean
@@ -854,6 +892,7 @@ if exist "rxTools-DUKESRG" (
     git clone --recursive https://github.com/dukesrg/rxTools.git
     cd rxTools
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building rxTools-DUKESRG ^(Clean^)...
 make clean
@@ -886,6 +925,7 @@ if exist "SaltFW" (
     git clone --recursive https://github.com/RShadowhand/SaltFW.git
     cd SaltFW
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building SaltFW ^(Clean^)...
 make clean
@@ -917,6 +957,7 @@ if exist "A9NC" (
     git clone --recursive https://github.com/d0k3/A9NC.git
     cd A9NC
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building A9NC ^(Clean^)...
 make clean
@@ -950,6 +991,7 @@ if exist "CtrBootManager" (
 )
 mkdir build release
 cd build
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building CtrBootManager ^(Clean^)...
 make clean
@@ -989,6 +1031,7 @@ if exist "CIAngel" (
     git clone --recursive https://github.com/llakssz/CIAngel.git
     cd CIAngel
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building CIAngel ^(Clean^)...
 make clean
@@ -1020,6 +1063,7 @@ if exist "CTRXplorer" (
     git clone --recursive https://github.com/d0k3/CTRXplorer.git
     cd CTRXplorer
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building CTRXplorer ^(Clean^)...
 make clean
@@ -1051,6 +1095,7 @@ if exist "Decrypt9WIP" (
     git clone --recursive https://github.com/d0k3/Decrypt9WIP.git
     cd Decrypt9WIP
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Decrypt9WIP ^(Clean^)...
 make clean
@@ -1084,6 +1129,7 @@ if exist "Decrypt9UI" (
     git clone --recursive https://github.com/Shadowtrance/Decrypt9.git
     cd Decrypt9
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Decrypt9UI ^(Clean^)...
 make clean
@@ -1118,6 +1164,7 @@ if exist "EmuNAND-9" (
     git clone --recursive https://github.com/d0k3/EmuNAND9.git
     cd EmuNAND9
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building EmuNAND-9 ^(Clean^)...
 make clean
@@ -1152,6 +1199,7 @@ if exist "EmuNAND9UI" (
     git clone --recursive https://github.com/Shadowtrance/EmuNAND9.git
     cd EmuNAND9
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building EmuNAND9UI ^(Clean^)...
 make clean
@@ -1184,6 +1232,7 @@ if exist "FBI" (
     git clone --recursive https://github.com/Steveice10/FBI.git
     cd FBI
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building FBI ^(Clean^)...
 make clean
@@ -1215,11 +1264,13 @@ if exist "FTPD" (
     git clone --recursive https://github.com/mtheall/ftpd.git
     cd FTPD
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building FTPD ^(Clean^)...
 make clean
 Title = Building FTPD ^(Release^)...
-make
+make all
+make cia
 Title = Building FTPD ^(Done^)
 echo.
 echo #####################################
@@ -1246,6 +1297,7 @@ if exist "GodMode9" (
     git clone --recursive https://github.com/d0k3/GodMode9.git
     cd GodMode9
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building GodMode9 ^(Clean^)...
 make clean
@@ -1277,6 +1329,7 @@ if exist "Hourglass9" (
     git clone --recursive https://github.com/d0k3/Hourglass9.git
     cd Hourglass9
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Hourglass9 ^(Clean^)...
 make clean
@@ -1308,6 +1361,7 @@ if exist "JKSM" (
     git clone --recursive https://github.com/J-D-K/JKSM.git
     cd JKSM
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building JKSM ^(Clean^)...
 make clean
@@ -1339,6 +1393,7 @@ if exist "OTPHelper" (
     git clone --recursive https://github.com/d0k3/OTPHelper.git
     cd OTPHelper
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building OTPHelper ^(Clean^)...
 make clean
@@ -1370,6 +1425,7 @@ if exist "TIKdevil" (
     git clone --recursive https://github.com/mmcx125/TIKdevil.git
     cd TIKdevil
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building TIKdevil ^(Clean^)...
 make clean
@@ -1420,6 +1476,7 @@ if exist "citro3d" (
     git clone --recursive https://github.com/fincs/citro3d.git
     cd citro3d
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building citro3d ^(Clean^)...
 make clean
@@ -1450,6 +1507,7 @@ if exist "citro3d" (
     git clone --recursive https://github.com/fincs/citro3d.git
     cd citro3d
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building citro3d ^(Clean^)...
 make clean
@@ -1500,6 +1558,7 @@ if exist "citrus" (
     git clone --recursive https://github.com/Steveice10/citrus.git
     cd citrus
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building citrus ^(Clean^)...
 make clean
@@ -1530,6 +1589,7 @@ if exist "citrus" (
     git clone --recursive https://github.com/Steveice10/citrus.git
     cd citrus
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building citrus ^(Clean^)...
 make clean
@@ -1571,18 +1631,22 @@ ECHO ...................................................................
 ECHO . Smealum's LIBCTRU Menu. Do you want to install or compile only? .
 ECHO ...................................................................
 ECHO.
-ECHO A - Install Smealum's LIBCTRU
-ECHO B - Compile Smealum's LIBCTRU
-ECHO C - Return to CTRULIB's Menu
-ECHO D - Return to LIBs Menu
-ECHO E - Return to Main Menu
-ECHO F - EXIT Program
+ECHO A - Install Smealum's Latest LIBCTRU
+ECHO B - Compile Smealum's Latest LIBCTRU
+ECHO C - Install a Specific Commit of Smealum's LIBCTRU
+ECHO D - Compile a Specific Commit of Smealum's LIBCTRU
+ECHO E - Return to CTRULIB's Menu
+ECHO F - Return to LIBs Menu
+ECHO G - Return to Main Menu
+ECHO H - EXIT Program
 ECHO.
-choice /C ABCDEF /M "Enter the letter of your choice:"
-IF ERRORLEVEL 6 exit
-IF ERRORLEVEL 5 GOTO TYPE
-IF ERRORLEVEL 4 GOTO LIBS
-IF ERRORLEVEL 3 GOTO LCTRU
+choice /C ABCDEFGH /M "Enter the letter of your choice:"
+IF ERRORLEVEL 8 exit
+IF ERRORLEVEL 7 GOTO TYPE
+IF ERRORLEVEL 6 GOTO LIBS
+IF ERRORLEVEL 5 GOTO LCTRU
+IF ERRORLEVEL 4 GOTO COMMITCOMP
+IF ERRORLEVEL 3 GOTO COMMITINST
 IF ERRORLEVEL 2 GOTO LIBCOMP
 IF ERRORLEVEL 1 GOTO LIBINST
 
@@ -1606,6 +1670,7 @@ if exist "Smea-ctrulib" (
 )
 echo Building...
 cd libctru
+set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
 make clean
 Title = Building libctru ^(Release^)...
@@ -1641,6 +1706,7 @@ if exist "Smea-ctrulib" (
 )
 echo Building...
 cd libctru
+set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
 make clean
 Title = Building libctru ^(Release^)...
@@ -1653,6 +1719,86 @@ cd ..
 cd ..
 ren ctrulib Smea-ctrulib
 echo Done. Files are in the "Smea-ctrulib/libctru" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:COMMITINST
+cls
+if exist "ctrulib-commit" (
+	echo Making a backup of your current ctrulib-commit source folder
+	xcopy "ctrulib-commit\*" "Backups_Compiles\Backup_ctrulib-commit" /e /i /y >nul
+	Timeout /t 1 /nobreak >nul
+	ren ctrulib-commit ctrulib
+    cd ctrulib
+    Title = Building ctrulib-commit ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building ctrulib-commit ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/smealum/ctrulib.git
+    cd ctrulib
+)
+cls
+set /p commit1="Please type the commit number you would like to install: "
+echo.
+git checkout %commit1%
+echo Building...
+cd libctru
+set PATH=c:\Python27\;%PATH%
+Title = Building libctru ^(Clean^)...
+make clean
+Title = Building libctru ^(Release^)...
+make install
+Title = Building libctru ^(Done^)
+echo.
+echo ########################################################
+color A
+cd ..
+cd ..
+ren ctrulib ctrulib-commit
+echo Done. Libctru is installed in the "c:/devkitpro" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:COMMITCOMP
+cls
+if exist "ctrulib-commit" (
+	echo Making a backup of your current ctrulib-commit source folder
+	xcopy "ctrulib-commit\*" "Backups_Compiles\Backup_ctrulib-commit" /e /i /y >nul
+	Timeout /t 1 /nobreak >nul
+	ren ctrulib-commit ctrulib
+    cd ctrulib
+    Title = Building ctrulib-commit ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building ctrulib-commit ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/smealum/ctrulib.git
+    cd ctrulib
+)
+cls
+set /p commit2="Please type the commit number you would like to compile: "
+echo.
+git checkout %commit2%
+echo Building...
+cd libctru
+set PATH=c:\Python27\;%PATH%
+Title = Building libctru ^(Clean^)...
+make clean
+Title = Building libctru ^(Release^)...
+make
+Title = Building libctru ^(Done^)
+echo.
+echo #######################################################
+color A
+cd ..
+cd ..
+ren ctrulib ctrulib-commit
+echo Done. Files are in the "ctrulib-commit/libctru" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -1698,6 +1844,7 @@ if exist "Steveice10-ctrulib" (
 )
 echo Building...
 cd libctru
+set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
 make clean
 Title = Building libctru ^(Release^)...
@@ -1733,6 +1880,7 @@ if exist "Steveice10-ctrulib" (
 )
 echo Building...
 cd libctru
+set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
 make clean
 Title = Building libctru ^(Release^)...
@@ -1846,6 +1994,7 @@ if exist "3ds_portlibs" (
     git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
     cd 3ds_portlibs
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-zlib ^(Clean^)...
 make clean
@@ -1877,6 +2026,7 @@ if exist "3ds_portlibs" (
     git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
     cd 3ds_portlibs
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-Zlib ^(Clean^)...
 make clean
@@ -1907,6 +2057,7 @@ if exist "3ds_portlibs" (
     git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
     cd 3ds_portlibs
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-FreeType2 ^(Clean^)...
 make clean
@@ -1938,6 +2089,7 @@ if exist "3ds_portlibs" (
     git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
     cd 3ds_portlibs
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-FreeType2 ^(Clean^)...
 make clean
@@ -1968,6 +2120,7 @@ if exist "3ds_portlibs" (
     git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
     cd 3ds_portlibs
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-LibPNG ^(Clean^)...
 make clean
@@ -1999,6 +2152,7 @@ if exist "3ds_portlibs" (
     git clone --recursive https://github.com/devkitPro/3ds_portlibs.git
     cd 3ds_portlibs
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-LibPNG ^(Clean^)...
 make clean
@@ -2050,6 +2204,7 @@ if exist "sf2dlib" (
     cd sf2dlib
 )
 cd libsf2d
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building sf2dlib ^(Clean^)...
 make clean
@@ -2082,6 +2237,7 @@ if exist "sf2dlib" (
     cd sf2dlib
 )
 cd libsf2d
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building sf2dlib ^(Clean^)...
 make clean
@@ -2134,6 +2290,7 @@ if exist "sftdlib" (
     cd sftdlib
 )
 cd libsftd
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Installing sftdlib ^(Clean^)...
 make clean
@@ -2166,6 +2323,7 @@ if exist "sftdlib" (
     cd sftdlib
 )
 cd libsftd
+set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Installing sftdlib ^(Clean^)...
 make clean
