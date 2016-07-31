@@ -2,9 +2,9 @@
 :TYPE
 Title = ALL-IN-ONE .bat ...
 cls
-ECHO ..................................
-ECHO . 3DS All in One Build Main Menu .
-ECHO ..................................
+ECHO .......................................
+ECHO . 3DS All in One Build Main Menu v1.7 .
+ECHO .......................................
 ECHO.
 ECHO A - Arm9loaderhax Menu
 ECHO B - Custom Firmware Menu
@@ -31,13 +31,17 @@ ECHO B - Build BootAnim9
 ECHO C - Build BootCTR9
 ECHO D - Build Delebile's Fork
 ECHO E - Build Dark Samus's Fork
-ECHO F - Build SafeA9LH
-ECHO G - Return to Main Menu
-ECHO H - EXIT Program
+ECHO F - Build SafeA9LH Installer
+ECHO G - Build ShadowNAND
+ECHO H - Build ShadowNAND Installer
+ECHO I - Return to Main Menu
+ECHO J - EXIT Program
 ECHO.
-choice /C ABCDEFGH /M "Enter the letter of your choice:"
-IF ERRORLEVEL 8 exit
-IF ERRORLEVEL 7 GOTO TYPE
+choice /C ABCDEFGHIJ /M "Enter the letter of your choice:"
+IF ERRORLEVEL 10 exit
+IF ERRORLEVEL 9 GOTO TYPE
+IF ERRORLEVEL 8 GOTO SHINST
+IF ERRORLEVEL 7 GOTO SHADOW
 IF ERRORLEVEL 6 GOTO SAFE
 IF ERRORLEVEL 5 GOTO SAMUS
 IF ERRORLEVEL 4 GOTO DELEB
@@ -53,26 +57,22 @@ ECHO . Custom Firmware Build Menu. Choose a CFW to compile: .
 ECHO ........................................................
 ECHO.
 ECHO A - Build Cakes
-ECHO B - Build Corbenik
-ECHO C - Build Cosmo3DS
-ECHO D - Build Luma3DS
-ECHO E - Build r3Tools
-ECHO F - Build ReiNAND
-ECHO G - Build rxTools
-ECHO H - Build SaltFW
-ECHO I - Return to Main Menu
-ECHO J - EXIT Program
+ECHO B - Build Cosmo3DS
+ECHO C - Build Luma3DS
+ECHO D - Build ReiNAND
+ECHO E - Build rxTools
+ECHO F - Build SaltFW
+ECHO G - Return to Main Menu
+ECHO H - EXIT Program
 ECHO.
-choice /C ABCDEFGHIJ /M "Enter the letter of your choice:"
-IF ERRORLEVEL 10 exit
-IF ERRORLEVEL 9 GOTO TYPE
-IF ERRORLEVEL 8 GOTO SALT
-IF ERRORLEVEL 7 GOTO RXT
-IF ERRORLEVEL 6 GOTO REI
-IF ERRORLEVEL 5 GOTO R3T
-IF ERRORLEVEL 4 GOTO LUMA
-IF ERRORLEVEL 3 GOTO COSMO
-IF ERRORLEVEL 2 GOTO CORBE
+choice /C ABCDEFGH /M "Enter the letter of your choice:"
+IF ERRORLEVEL 8 exit
+IF ERRORLEVEL 7 GOTO TYPE
+IF ERRORLEVEL 6 GOTO SALT
+IF ERRORLEVEL 5 GOTO RXT
+IF ERRORLEVEL 4 GOTO REI
+IF ERRORLEVEL 3 GOTO LUMA
+IF ERRORLEVEL 2 GOTO COSMO
 IF ERRORLEVEL 1 GOTO CAKES
 
 :HB
@@ -82,42 +82,50 @@ ECHO ....................................................
 ECHO . Homebrew Build Menu. Choose a source to compile: .
 ECHO ....................................................
 ECHO.
-ECHO A - Build A9NC
-ECHO B - Build CtrBootManager9
-ECHO C - Build CIAngel
-ECHO D - Build CTRXplorer
-ECHO E - Build Decrypt9
-ECHO F - Build Decrypt9UI
-ECHO G - Build EmuNAND9
-ECHO H - Build EmuNAND9UI
-ECHO I - Build FBI
-ECHO J - Build FTPD
-ECHO K - Build GodMode9
-ECHO L - Build Hourglass9
-ECHO M - Build JK's Save Manager
-ECHO N - Build OTPHelper
-ECHO O - Build TIKdevil
-ECHO P - Return to Main Menu
-ECHO Q - EXIT Program
+ECHO A - Build 3DSident
+ECHO B - Build A9NC
+ECHO C - Build CtrBootManager9
+ECHO D - Build CIAngel
+ECHO E - Build CTRXplorer
+ECHO F - Build Decrypt9
+ECHO G - Build Decrypt9UI
+ECHO H - Build EmuNAND9
+ECHO I - Build EmuNAND9UI
+ECHO J - Build encTitleKeys.bin-Updater
+ECHO K - Build FBI
+ECHO L - Build FTPD
+ECHO M - Build GodMode9
+ECHO N - Build Homebr3w
+ECHO O - Build Hourglass9
+ECHO P - Build Hourglass9UI
+ECHO Q - Build JK's Save Manager
+ECHO R - Build OTPHelper
+ECHO S - Build TIKdevil
+ECHO T - Return to Main Menu
+ECHO U - EXIT Program
 ECHO.
-choice /C ABCDEFGHIJKLMNOPQ /M "Enter the letter of your choice:"
-IF ERRORLEVEL 17 exit
-IF ERRORLEVEL 16 GOTO TYPE
-IF ERRORLEVEL 15 GOTO TIK
-IF ERRORLEVEL 14 GOTO OTPH
-IF ERRORLEVEL 13 GOTO JKSM
-IF ERRORLEVEL 12 GOTO HG9
-IF ERRORLEVEL 11 GOTO GM9
-IF ERRORLEVEL 10 GOTO FTPD
-IF ERRORLEVEL 9 GOTO FBI
-IF ERRORLEVEL 8 GOTO E9UI
-IF ERRORLEVEL 7 GOTO E9
-IF ERRORLEVEL 6 GOTO D9UI
-IF ERRORLEVEL 5 GOTO D9WIP
-IF ERRORLEVEL 4 GOTO CTRX
-IF ERRORLEVEL 3 GOTO ANGEL
-IF ERRORLEVEL 2 GOTO CBM9
-IF ERRORLEVEL 1 GOTO A9NC
+choice /C ABCDEFGHIJKLMNOPQRSTU /M "Enter the letter of your choice:"
+IF ERRORLEVEL 21 exit
+IF ERRORLEVEL 20 GOTO TYPE
+IF ERRORLEVEL 19 GOTO TIK
+IF ERRORLEVEL 18 GOTO OTPH
+IF ERRORLEVEL 17 GOTO JKSM
+IF ERRORLEVEL 16 GOTO HG9UI
+IF ERRORLEVEL 15 GOTO HG9
+IF ERRORLEVEL 14 GOTO HOM
+IF ERRORLEVEL 13 GOTO GM9
+IF ERRORLEVEL 12 GOTO FTPD
+IF ERRORLEVEL 11 GOTO FBI
+IF ERRORLEVEL 10 GOTO ENC
+IF ERRORLEVEL 9 GOTO E9UI
+IF ERRORLEVEL 8 GOTO E9
+IF ERRORLEVEL 7 GOTO D9UI
+IF ERRORLEVEL 6 GOTO D9WIP
+IF ERRORLEVEL 5 GOTO CTRX
+IF ERRORLEVEL 4 GOTO ANGEL
+IF ERRORLEVEL 3 GOTO CBM9
+IF ERRORLEVEL 2 GOTO A9NC
+IF ERRORLEVEL 1 GOTO IDENT
 
 :LIBS
 Title = ALL-IN-ONE .bat ...
@@ -147,89 +155,35 @@ IF ERRORLEVEL 1 GOTO CITRO3D
 
 :AURORA
 cls
-Title = Building arm9loaderhax...
-ECHO ...........................................................
-ECHO . Aurora's A9LH Menu. Which Build do you want to compile? .
-ECHO ...........................................................
-ECHO.
-ECHO A - Screeninit
-ECHO B - No Screeninit
-ECHO C - Return to Arm9loaderhax Menu
-ECHO D - Return to Main Menu
-ECHO E - EXIT Program
-ECHO.
-choice /C ABCDE /M "Enter the letter of your choice:"
-IF ERRORLEVEL 5 exit
-IF ERRORLEVEL 4 GOTO TYPE
-IF ERRORLEVEL 3 GOTO A9LH
-IF ERRORLEVEL 2 GOTO NOINIT
-IF ERRORLEVEL 1 GOTO INIT
-
-:INIT
-cls
-if exist "A9LH-AUR-init" (
-	echo Making a backup of your current A9LH-AUR-init folder
-	xcopy "A9LH-AUR-init\*" "Backups_Compiles\Backup_A9LH-AUR-init" /e /i /y >nul
+if exist "A9LH-AUR" (
+	echo Making a backup of your current A9LH-AUR folder
+	xcopy "A9LH-AUR\*" "Backups_Compiles\Backup_A9LH-AUR" /e /i /y >nul
 	Timeout /t 1 /nobreak >nul
-	ren A9LH-AUR-init arm9loaderhax
+	ren A9LH-AUR arm9loaderhax
     cd arm9loaderhax
-    Title = Building A9LH-AUR-init ^(Update^)...
+    Title = Building A9LH-AUR ^(Update^)...
     echo Updating repo...
     git pull origin master
     git submodule update --init --recursive
 ) else (
-    Title = Building A9LH-AUR-init ^(Clone^)...
+    Title = Building A9LH-AUR ^(Clone^)...
     echo Cloning repo...
     git clone --recursive https://github.com/AuroraWright/arm9loaderhax.git
     cd arm9loaderhax
 )
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building A9LH-AUR-init ^(Clean^)...
-make clean
-Title = Building A9LH-AUR-init ^(Release^)...
-make
-Title = Building A9LH-AUR-init ^(Done^)
+Title = Building A9LH-AUR ^(Clean^)...
+git clean -fxd
+Title = Building A9LH-AUR ^(Release^)...
+make all
+Title = Building A9LH-AUR ^(Done^)
 echo.
 echo ##################################################
 color A
 cd ..
-ren arm9loaderhax A9LH-AUR-init
-echo Done. Files are in the "A9LH-AUR-init/out" folder. && echo Press any key to continue ...
-Pause >nul
-GOTO END
-
-:NOINIT
-cls
-if exist "A9LH-AUR-noinit" (
-	echo Making a backup of your current arm9loaderhax folder
-	xcopy "A9LH-AUR-noinit\*" "Backups_Compiles\Backup_A9LH-AUR-noinit" /e /i /y >nul
-	Timeout /t 1 /nobreak >nul
-	ren A9LH-AUR-noinit arm9loaderhax
-    cd arm9loaderhax
-    Title = Building A9LH-AUR-noinit ^(Update^)...
-    echo Updating repo...
-    git pull origin master
-    git submodule update --init --recursive
-) else (
-    Title = Building A9LH-AUR-noinit ^(Clone^)...
-    echo Cloning repo...
-    git clone --recursive https://github.com/AuroraWright/arm9loaderhax.git -b noscreeninit
-    cd arm9loaderhax
-)
-set PATH=c:\Python27\;%PATH%
-echo Building...
-Title = Building A9LH-AUR-noinit ^(Clean^)...
-make clean
-Title = Building A9LH-AUR-noinit ^(Release^)...
-make
-Title = Building A9LH-AUR-noinit ^(Done^)
-echo.
-echo ####################################################
-color A
-cd ..
-ren arm9loaderhax A9LH-AUR-noinit
-echo Done. Files are in the "A9LH-AUR-noinit/out" folder. && echo Press any key to continue ...
+ren arm9loaderhax A9LH-AUR
+echo Done. Files are in the "A9LH-AUR/out" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -253,7 +207,7 @@ if exist "BootAnim9" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building BootAnim9 ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building BootAnim9 ^(Release^)...
 make
 Title = Building BootAnim9 ^(Done^)
@@ -282,6 +236,8 @@ if exist "BootCtr9" (
     git clone --recursive https://github.com/hartmannaf/BootCtr9.git
     cd BootCtr9
 )
+Title = Building BootCtr9 ^(Clean^)...
+git clean -fxd
 :A9FCHECK1
 Title = Building arm9loaderhax ^(Requirements^)...
 cls
@@ -321,10 +277,14 @@ echo OTP.bin doesn't exist. && echo Please copy [OTP.bin] to BootCtr9/data_input
 Pause >nul
 GOTO A9FCHECK1
 )
+cd payload_installer\brahma2\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
+cd ..
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building BootCtr9 ^(Clean^)...
-make clean
 Title = Building BootCtr9 ^(Release^)...
 make
 Title = Building BootCtr9 ^(Done^)
@@ -355,6 +315,8 @@ if exist "Delebile-A9LH" (
     git clone --recursive https://github.com/delebile/arm9loaderhax.git
     cd arm9loaderhax
 )
+Title = Building arm9loaderhax ^(Clean^)...
+git clean -fxd
 :A9FCHECK2
 Title = Building arm9loaderhax ^(Requirements^)...
 cls
@@ -394,10 +356,14 @@ echo OTP.bin doesn't exist. && echo Please copy [OTP.bin] to arm9loaderhax/data_
 Pause >nul
 GOTO A9FCHECK2
 )
+cd payload_installer\brahma2\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
+cd ..
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building arm9loaderhax ^(Clean^)...
-make clean
 Title = Building arm9loaderhax ^(Release^)...
 make
 Title = Building arm9loaderhax ^(Done^)
@@ -432,7 +398,7 @@ if exist "Samus-A9LH" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building arm9loaderhax ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building arm9loaderhax ^(Release^)...
 make
 Title = Building arm9loaderhax ^(Done^)
@@ -462,18 +428,96 @@ if exist "SafeA9LHInstaller" (
     git clone --recursive https://github.com/AuroraWright/SafeA9LHInstaller
     cd SafeA9LHInstaller
 )
+Title = Building SafeA9LHInstaller ^(Clean^)...
+git clean -fxd
+cd cakebrah\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building SafeA9LHInstaller ^(Clean^)...
-make clean
 Title = Building SafeA9LHInstaller ^(Release^)...
-make
+make all
+make release
 Title = Building SafeA9LHInstaller ^(Done^)
 echo.
 echo ######################################################
 color A
 cd ..
 echo Done. Files are in the "SafeA9LHInstaller/out" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:SHADOW
+cls
+Title = Building ShadowNAND...
+if exist "ShadowNAND" (
+	echo Making a backup of your current ShadowNAND folder
+	xcopy "ShadowNAND\*" "Backups_Compiles\Backup_ShadowNAND" /e /i /y >nul
+    cd ShadowNAND
+    Title = Building ShadowNAND ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building ShadowNAND ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/RShadowhand/ShadowNAND.git
+    cd ShadowNAND
+)
+set PATH=c:\Python27\;%PATH%
+echo Building...
+Title = Building ShadowNAND ^(Clean^)...
+git clean -fxd
+Title = Building ShadowNAND ^(Release^)...
+make all
+make launcher
+Title = Building ShadowNAND ^(Done^)
+echo.
+echo ###############################################
+color A
+cd ..
+echo Done. Files are in the "ShadowNAND/out" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:SHINST
+cls
+Title = Building ShadowNAND_Installer...
+if exist "ShadowNAND_Installer" (
+	echo Making a backup of your current ShadowNAND_Installer folder
+	xcopy "ShadowNAND_Installer\*" "Backups_Compiles\Backup_ShadowNAND_Installer" /e /i /y >nul
+    cd ShadowNAND_Installer
+    Title = Building ShadowNAND_Installer ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building ShadowNAND_Installer ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/RShadowhand/ShadowNAND_Installer.git
+    cd ShadowNAND_Installer
+)
+Title = Building ShadowNAND_Installer ^(Clean^)...
+git clean -fxd
+cd cakebrah\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
+set PATH=c:\Python27\;%PATH%
+echo Building...
+Title = Building ShadowNAND_Installer ^(Release^)...
+make all
+make ninjhax
+make release
+Title = Building ShadowNAND_Installer ^(Done^)
+echo.
+echo #########################################################
+color A
+cd ..
+echo Done. Files are in the "ShadowNAND_Installer/out" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -497,49 +541,19 @@ if exist "CakesForeveryWan" (
 set PATH=c:\Python3\;%PATH%
 echo Building...
 Title = Building Cakes ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Cakes ^(Release^)...
+make launcher
+cd out
+dd if=Cakes.dat of=arm9loaderhax.bin bs=512 skip=144
+cd ..
 make release
 Title = Building Cakes ^(Done^)
 echo.
-echo #####################################################
-color A
-copy build\main.bin out\
-ren out\main.bin arm9loaderhax.bin
-cd ..
-echo Done. Files are in the "CakesForeveryWan/out" folder. && echo Press any key to continue ...
-Pause >nul
-GOTO END
-
-:CORBE
-cls
-Title = Building corbenik...
-if exist "corbenik" (
-	echo Making a backup of your current corbenik folder
-	xcopy "corbenik\*" "Backups_Compiles\Backup_corbenik" /e /i /y >nul
-    cd corbenik
-    Title = Building corbenik ^(Update^)...
-    echo Updating repo...
-    git pull origin master
-    git submodule update --init --recursive
-) else (
-    Title = Building corbenik ^(Clone^)...
-    echo Cloning repo...
-    git clone --recursive https://github.com/chaoskagami/corbenik.git
-    cd corbenik
-)
-set PATH=c:\Python27\;%PATH%
-echo Building...
-Title = Building corbenik ^(Clean^)...
-make clean
-Title = Building corbenik ^(Release^)...
-make
-Title = Building corbenik ^(Done^)
-echo.
-echo #############################################
+echo #################################################
 color A
 cd ..
-echo Done. Files are in the "corbenik/out" folder. && echo Press any key to continue ...
+echo Done. Files are in the "CakesForeveryWan" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -563,7 +577,7 @@ if exist "Cosmo3DS" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Cosmo3DS ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Cosmo3DS ^(Release^)...
 make
 Title = Building Cosmo3DS ^(Done^)
@@ -616,7 +630,7 @@ if exist "Luma3DS-USER" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Luma3DS-USER ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Luma3DS-USER ^(Release^)...
 make release
 Title = Building Luma3DS-USER ^(Done^)
@@ -639,7 +653,7 @@ if exist "Luma3DS-DEV" (
     cd Luma3DS
     Title = Building Luma3DS-DEV ^(Update^)...
     echo Updating repo...
-    git pull origin master
+    git pull origin developer
     git submodule update --init --recursive
 ) else (
     Title = Building Luma3DS-DEV ^(Clone^)...
@@ -651,7 +665,7 @@ if exist "Luma3DS-DEV" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Luma3DS-DEV ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Luma3DS-DEV ^(Release^)...
 make release
 Title = Building Luma3DS-DEV ^(Done^)
@@ -661,38 +675,6 @@ color A
 cd ..
 ren Luma3DS Luma3DS-DEV
 echo Done. Files are in the "Luma3DS-DEV/out" folder. && echo Press any key to continue ...
-Pause >nul
-GOTO END
-
-:R3T
-cls
-Title = Building r3Tools...
-if exist "r3Tools" (
-	echo Making a backup of your current r3Tools folder
-	xcopy "r3Tools\*" "Backups_Compiles\Backup_r3Tools" /e /i /y >nul
-    cd r3Tools
-    Title = Building r3Tools ^(Update^)...
-    echo Updating repo...
-    git pull origin master
-    git submodule update --init --recursive
-) else (
-    Title = Building r3Tools ^(Clone^)...
-    echo Cloning repo...
-    git clone --recursive https://github.com/173210/r3Tools.git
-    cd r3Tools
-)
-set PATH=c:\Python27\;%PATH%
-echo Building...
-Title = Building r3Tools ^(Clean^)...
-make clean
-Title = Building r3Tools ^(Release^)...
-make release
-Title = Building r3Tools ^(Done^)
-echo.
-echo ################################################
-color A
-cd ..
-echo Done. Files are in the "r3Tools/release" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -734,10 +716,15 @@ if exist "ReiNand-O3DS" (
     git clone --recursive https://github.com/Reisyukaku/ReiNand.git
     cd ReiNand
 )
+Title = Building ReiNand-O3DS ^(Clean^)...
+git clean -fxd
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building ReiNand-O3DS ^(Clean^)...
-make clean
+cd cakebrah\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
 Title = Building ReiNand-O3DS ^(Release^)...
 make cons=o3ds
 Title = Building ReiNand-O3DS ^(Done^)
@@ -768,10 +755,15 @@ if exist "ReiNand-N3DS" (
     git clone --recursive https://github.com/Reisyukaku/ReiNand.git
     cd ReiNand
 )
+Title = Building ReiNand-N3DS ^(Clean^)...
+git clean -fxd
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building ReiNand-N3DS ^(Clean^)...
-make clean
+cd cakebrah\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
 Title = Building ReiNand-N3DS ^(Release^)...
 make cons=n3ds
 Title = Building ReiNand-N3DS ^(Done^)
@@ -824,10 +816,15 @@ if exist "rxTools-Main" (
     git clone --recursive https://github.com/roxas75/rxTools
     cd rxTools
 )
+Title = Building rxTools-Main ^(Clean^)...
+git clean -fxd
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building rxTools-Main ^(Clean^)...
-make clean
+cd cakebrah\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
 Title = Building rxTools-Main ^(Release^)...
 make release
 Title = Building rxTools-Main ^(Done^)
@@ -850,18 +847,24 @@ if exist "rxTools-A9LH" (
     cd rxTools
     Title = Building rxTools-A9LH ^(Update^)...
     echo Updating repo...
-    git pull origin master
+    git pull origin arm9loaderhax
     git submodule update --init --recursive
 ) else (
     Title = Building rxTools-A9LH ^(Clone^)...
     echo Cloning repo...
-    git clone --recursive https://github.com/roxas75/rxTools.git -b arm9loaderhax
+    git clone --recursive https://github.com/roxas75/rxTools.git
     cd rxTools
+	git checkout arm9loaderhax
 )
+Title = Building rxTools-A9LH ^(Clean^)...
+git clean -fxd
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building rxTools-A9LH ^(Clean^)...
-make clean
+cd cakebrah\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
 Title = Building rxTools-A9LH ^(Release^)...
 make release
 Title = Building rxTools-A9LH ^(Done^)
@@ -892,10 +895,15 @@ if exist "rxTools-DUKESRG" (
     git clone --recursive https://github.com/dukesrg/rxTools.git
     cd rxTools
 )
+Title = Building rxTools-DUKESRG ^(Clean^)...
+git clean -fxd
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building rxTools-DUKESRG ^(Clean^)...
-make clean
+cd cakebrah\source\
+rmdir libkhax /s /q
+git clone --recursive https://github.com/Myriachan/libkhax.git
+cd ..
+cd ..
 Title = Building rxTools-DUKESRG ^(Release^)...
 make release
 Title = Building rxTools-DUKESRG ^(Done^)
@@ -928,7 +936,7 @@ if exist "SaltFW" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building SaltFW ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building SaltFW ^(Release^)...
 make
 Title = Building SaltFW ^(Done^)
@@ -937,6 +945,38 @@ echo ###########################################
 color A
 cd ..
 echo Done. Files are in the "SaltFW/out" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:IDENT
+cls
+Title = Building 3DSident...
+if exist "3DSident" (
+	echo Making a backup of your current 3DSident folder
+	xcopy "3DSident\*" "Backups_Compiles\Backup_3DSident" /e /i /y >nul
+    cd 3DSident
+    Title = Building 3DSident ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building 3DSident ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/joel16/3DSident.git
+    cd 3DSident
+)
+set PATH=c:\Python27\;%PATH%
+echo Building...
+Title = Building 3DSident ^(Clean^)...
+git clean -fxd
+Title = Building 3DSident ^(Release^)...
+make all
+Title = Building 3DSident ^(Done^)
+echo.
+echo ############################################
+color A
+cd ..
+echo Done. Files are in the "3DSident" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -960,7 +1000,7 @@ if exist "A9NC" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building A9NC ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building A9NC ^(Release^)...
 make
 Title = Building A9NC ^(Done^)
@@ -981,20 +1021,21 @@ if exist "CtrBootManager" (
     cd CtrBootManager
     Title = Building CtrBootManager ^(Update^)...
     echo Updating repo...
-    git pull origin master
+    git pull origin a9lh
     git submodule update --init --recursive
 ) else (
     Title = Building CtrBootManager ^(Clone^)...
     echo Cloning repo...
-    git clone --recursive https://github.com/Cpasjuste/CtrBootManager.git -b a9lh
+    git clone --recursive https://github.com/Cpasjuste/CtrBootManager.git
     cd CtrBootManager
+	git checkout a9lh
 )
-mkdir build release
-cd build
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building CtrBootManager ^(Clean^)...
-make clean
+git clean -fxd
+mkdir build release
+cd build
 Title = Building CtrBootManager ^(Stage 1^)...
 cmake -DCMAKE_TOOLCHAIN_FILE=../DevkitARM3DS.cmake ../ -G "MSYS Makefiles"
 Title = Building CtrBootManager ^(Stage 2^)...
@@ -1034,7 +1075,7 @@ if exist "CIAngel" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building CIAngel ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building CIAngel ^(Release^)...
 make
 Title = Building CIAngel ^(Done^)
@@ -1066,7 +1107,7 @@ if exist "CTRXplorer" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building CTRXplorer ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building CTRXplorer ^(Release^)...
 make
 Title = Building CTRXplorer ^(Done^)
@@ -1098,7 +1139,7 @@ if exist "Decrypt9WIP" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Decrypt9WIP ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Decrypt9WIP ^(Release^)...
 make release
 Title = Building Decrypt9WIP ^(Done^)
@@ -1132,7 +1173,7 @@ if exist "Decrypt9UI" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Decrypt9UI ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Decrypt9UI ^(Release^)...
 make release
 Title = Building Decrypt9UI ^(Done^)
@@ -1167,7 +1208,7 @@ if exist "EmuNAND-9" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building EmuNAND-9 ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building EmuNAND-9 ^(Release^)...
 make release
 Title = Building EmuNAND-9 ^(Done^)
@@ -1202,7 +1243,7 @@ if exist "EmuNAND9UI" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building EmuNAND9UI ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building EmuNAND9UI ^(Release^)...
 make release
 Title = Building EmuNAND9UI ^(Done^)
@@ -1212,6 +1253,38 @@ color A
 cd ..
 ren EmuNAND9 EmuNAND9UI
 echo Done. Files are in the "EmuNAND9UI/release" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:ENC
+cls
+Title = Building encTitleKeys.bin-Updater...
+if exist "encTitleKeys.bin-Updater" (
+	echo Making a backup of your current encTitleKeys.bin-Updater folder
+	xcopy "encTitleKeys.bin-Updater\*" "Backups_Compiles\Backup_encTitleKeys.bin-Updater" /e /i /y >nul
+    cd encTitleKeys.bin-Updater
+    Title = Building encTitleKeys.bin-Updater ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building encTitleKeys.bin-Updater ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/Wolvan/encTitleKeys.bin-Updater.git
+    cd encTitleKeys.bin-Updater
+)
+set PATH=c:\Python27\;%PATH%
+echo Building...
+Title = Building encTitleKeys.bin-Updater ^(Clean^)...
+git clean -fxd
+Title = Building encTitleKeys.bin-Updater ^(Release^)...
+make dist-zip
+Title = Building encTitleKeys.bin-Updater ^(Done^)
+echo.
+echo ###############################################################
+color A
+cd ..
+echo Done. Files are in the "encTitleKeys.bin-Updater/build" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -1235,9 +1308,9 @@ if exist "FBI" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building FBI ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building FBI ^(Release^)...
-make
+make all
 Title = Building FBI ^(Done^)
 echo.
 echo ####################################
@@ -1267,7 +1340,7 @@ if exist "FTPD" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building FTPD ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building FTPD ^(Release^)...
 make all
 make cia
@@ -1300,7 +1373,7 @@ if exist "GodMode9" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building GodMode9 ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building GodMode9 ^(Release^)...
 make release
 Title = Building GodMode9 ^(Done^)
@@ -1312,34 +1385,104 @@ echo Done. Files are in the "GodMode9/release" folder. && echo Press any key to 
 Pause >nul
 GOTO END
 
-:HG9
+:HOM
 cls
-Title = Building Hourglass9...
-if exist "Hourglass9" (
-	echo Making a backup of your current Hourglass9 folder
-	xcopy "Hourglass9\*" "Backups_Compiles\Backup_Hourglass9" /e /i /y >nul
-    cd Hourglass9
-    Title = Building Hourglass9 ^(Update^)...
+Title = Building Homebr3w...
+if exist "Homebr3w" (
+	echo Making a backup of your current Homebr3w folder
+	xcopy "Homebr3w\*" "Backups_Compiles\Backup_Homebr3w" /e /i /y >nul
+    cd Homebr3w
+    Title = Building Homebr3w ^(Update^)...
     echo Updating repo...
     git pull origin master
     git submodule update --init --recursive
 ) else (
-    Title = Building Hourglass9 ^(Clone^)...
+    Title = Building Homebr3w ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/Wolvan/Homebr3w.git
+    cd Homebr3w
+)
+set PATH=c:\Python27\;%PATH%
+echo Building...
+Title = Building Homebr3w ^(Clean^)...
+git clean -fxd
+Title = Building Homebr3w ^(Release^)...
+make dist-zip
+Title = Building Homebr3w ^(Done^)
+echo.
+echo ###############################################
+color A
+cd ..
+echo Done. Files are in the "Homebr3w/build" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:HG9
+cls
+Title = Building Hourglass-9...
+if exist "Hourglass-9" (
+	echo Making a backup of your current Hourglass-9 folder
+	xcopy "Hourglass-9\*" "Backups_Compiles\Backup_Hourglass-9" /e /i /y >nul
+	Timeout /t 2 /nobreak >nul
+	ren Hourglass-9 Hourglass9
+    cd Hourglass9
+    Title = Building Hourglass-9 ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building Hourglass-9 ^(Clone^)...
     echo Cloning repo...
     git clone --recursive https://github.com/d0k3/Hourglass9.git
     cd Hourglass9
 )
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building Hourglass9 ^(Clean^)...
-make clean
-Title = Building Hourglass9 ^(Release^)...
+Title = Building Hourglass-9 ^(Clean^)...
+git clean -fxd
+Title = Building Hourglass-9 ^(Release^)...
 make release
-Title = Building Hourglass9 ^(Done^)
+Title = Building Hourglass-9 ^(Done^)
+echo.
+echo ####################################################
+color A
+cd ..
+ren Hourglass9 Hourglass-9
+echo Done. Files are in the "Hourglass-9/release" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:HG9UI
+cls
+Title = Building Hourglass9UI...
+if exist "Hourglass9UI" (
+	echo Making a backup of your current Hourglass9UI folder
+	xcopy "Hourglass9UI\*" "Backups_Compiles\Backup_Hourglass9UI" /e /i /y >nul
+	Timeout /t 2 /nobreak >nul
+	ren Hourglass9UI Hourglass9
+    cd Hourglass9
+    Title = Building Hourglass9UI ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building Hourglass9UI ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/Shadowtrance/Hourglass9.git
+    cd Hourglass9
+)
+set PATH=c:\Python27\;%PATH%
+echo Building...
+Title = Building Hourglass9UI ^(Clean^)...
+git clean -fxd
+Title = Building Hourglass9UI ^(Release^)...
+make release
+Title = Building Hourglass9UI ^(Done^)
 echo.
 echo #################################################
 color A
 cd ..
+ren Hourglass9 Hourglass9UI
 echo Done. Files are in the "Hourglass9/release" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
@@ -1353,18 +1496,19 @@ if exist "JKSM" (
     cd JKSM
     Title = Building JKSM ^(Update^)...
     echo Updating repo...
-    git pull origin master
+    git pull origin cleanup
     git submodule update --init --recursive
 ) else (
     Title = Building JKSM ^(Clone^)...
     echo Cloning repo...
     git clone --recursive https://github.com/J-D-K/JKSM.git
     cd JKSM
+	git checkout cleanup
 )
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building JKSM ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building JKSM ^(Release^)...
 make cia
 Title = Building JKSM ^(Done^)
@@ -1396,7 +1540,7 @@ if exist "OTPHelper" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building OTPHelper ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building OTPHelper ^(Release^)...
 make release
 Title = Building OTPHelper ^(Done^)
@@ -1411,32 +1555,90 @@ GOTO END
 :TIK
 cls
 Title = Building TIKdevil...
-if exist "TIKdevil" (
-	echo Making a backup of your current TIKdevil folder
-	xcopy "TIKdevil\*" "Backups_Compiles\Backup_TIKdevil" /e /i /y >nul
+ECHO ......................................................
+ECHO . TIKdevil Menu. Which build do you want to compile? .
+ECHO ......................................................
+ECHO.
+ECHO A - Mmcx125's TIKdevil Fork
+ECHO B - DanTheMan827's TIKdevil Fork
+ECHO C - Return to Homebrew Menu
+ECHO D - Return to Main Menu
+ECHO E - EXIT Program
+ECHO.
+choice /C ABCDE /M "Enter the letter of your choice:"
+IF ERRORLEVEL 5 exit
+IF ERRORLEVEL 4 GOTO TYPE
+IF ERRORLEVEL 3 GOTO HB
+IF ERRORLEVEL 2 GOTO DTM
+IF ERRORLEVEL 1 GOTO MMCX
+
+:MMCX
+cls
+Title = Building TIKdevil-Mmcx125...
+if exist "TIKdevil-Mmcx125" (
+	echo Making a backup of your current TIKdevil-Mmcx125 folder
+	xcopy "TIKdevil-Mmcx125\*" "Backups_Compiles\Backup_TIKdevil-Mmcx125" /e /i /y >nul
+	Timeout /t 2 /nobreak >nul
+	ren TIKdevil-Mmcx125 TIKdevil
     cd TIKdevil
-    Title = Building TIKdevil ^(Update^)...
+    Title = Building TIKdevil-Mmcx125 ^(Update^)...
     echo Updating repo...
     git pull origin master
     git submodule update --init --recursive
 ) else (
-    Title = Building TIKdevil ^(Clone^)...
+    Title = Building TIKdevil-Mmcx125 ^(Clone^)...
     echo Cloning repo...
     git clone --recursive https://github.com/mmcx125/TIKdevil.git
     cd TIKdevil
 )
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building TIKdevil ^(Clean^)...
-make clean
-Title = Building TIKdevil ^(Release^)...
+Title = Building TIKdevil-Mmcx125 ^(Clean^)...
+git clean -fxd
+Title = Building TIKdevil-Mmcx125 ^(Release^)...
 make
-Title = Building TIKdevil ^(Done^)
+Title = Building TIKdevil-Mmcx125 ^(Done^)
 echo.
-echo #################################################
+echo ########################################################
 color A
 cd ..
-echo Done. Files are in the "TIKdevil/output" folder. && echo Press any key to continue ...
+ren TIKdevil TIKdevil-Mmcx125
+echo Done. Files are in the "TIKdevil-Mmcx125/output" folder. && echo Press any key to continue ...
+Pause >nul
+GOTO END
+
+:DTM
+cls
+Title = Building TIKdevil-DanTheMan827...
+if exist "TIKdevil-DanTheMan827" (
+	echo Making a backup of your current TIKdevil-DanTheMan827 folder
+	xcopy "TIKdevil-DanTheMan827\*" "Backups_Compiles\Backup_TIKdevil-DanTheMan827" /e /i /y >nul
+	Timeout /t 2 /nobreak >nul
+	ren TIKdevil-DanTheMan827 TIKdevil
+    cd TIKdevil
+    Title = Building TIKdevil-DanTheMan827 ^(Update^)...
+    echo Updating repo...
+    git pull origin master
+    git submodule update --init --recursive
+) else (
+    Title = Building TIKdevil-DanTheMan827 ^(Clone^)...
+    echo Cloning repo...
+    git clone --recursive https://github.com/DanTheMan827/TIKdevil.git
+    cd TIKdevil
+)
+set PATH=c:\Python27\;%PATH%
+echo Building...
+Title = Building TIKdevil-DanTheMan827 ^(Clean^)...
+git clean -fxd
+Title = Building TIKdevil-DanTheMan827 ^(Release^)...
+make
+Title = Building TIKdevil-DanTheMan827 ^(Done^)
+echo.
+echo #############################################################
+color A
+cd ..
+ren TIKdevil TIKdevil-DanTheMan827
+echo Done. Files are in the "TIKdevil-DanTheMan827/output" folder. && echo Press any key to continue ...
 Pause >nul
 GOTO END
 
@@ -1479,7 +1681,7 @@ if exist "citro3d" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building citro3d ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building citro3d ^(Release^)...
 make install
 Title = Building citro3d ^(Done^)
@@ -1510,7 +1712,7 @@ if exist "citro3d" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building citro3d ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building citro3d ^(Release^)...
 make
 Title = Building citro3d ^(Done^)
@@ -1561,7 +1763,7 @@ if exist "citrus" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building citrus ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building citrus ^(Release^)...
 make install
 Title = Building citrus ^(Done^)
@@ -1592,7 +1794,7 @@ if exist "citrus" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building citrus ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building citrus ^(Release^)...
 make
 Title = Building citrus ^(Done^)
@@ -1668,11 +1870,11 @@ if exist "Smea-ctrulib" (
     git clone --recursive https://github.com/smealum/ctrulib.git
     cd ctrulib
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 cd libctru
-set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building libctru ^(Release^)...
 make install
 Title = Building libctru ^(Done^)
@@ -1704,11 +1906,11 @@ if exist "Smea-ctrulib" (
     git clone --recursive https://github.com/smealum/ctrulib.git
     cd ctrulib
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 cd libctru
-set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building libctru ^(Release^)...
 make
 Title = Building libctru ^(Done^)
@@ -1744,11 +1946,11 @@ cls
 set /p commit1="Please type the commit number you would like to install: "
 echo.
 git checkout %commit1%
+set PATH=c:\Python27\;%PATH%
 echo Building...
 cd libctru
-set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building libctru ^(Release^)...
 make install
 Title = Building libctru ^(Done^)
@@ -1784,11 +1986,11 @@ cls
 set /p commit2="Please type the commit number you would like to compile: "
 echo.
 git checkout %commit2%
+set PATH=c:\Python27\;%PATH%
 echo Building...
 cd libctru
-set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building libctru ^(Release^)...
 make
 Title = Building libctru ^(Done^)
@@ -1842,11 +2044,11 @@ if exist "Steveice10-ctrulib" (
     git clone --recursive https://github.com/Steveice10/ctrulib.git
     cd ctrulib
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 cd libctru
-set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building libctru ^(Release^)...
 make install
 Title = Building libctru ^(Done^)
@@ -1878,11 +2080,11 @@ if exist "Steveice10-ctrulib" (
     git clone --recursive https://github.com/Steveice10/ctrulib.git
     cd ctrulib
 )
+set PATH=c:\Python27\;%PATH%
 echo Building...
 cd libctru
-set PATH=c:\Python27\;%PATH%
 Title = Building libctru ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building libctru ^(Release^)...
 make
 Title = Building libctru ^(Done^)
@@ -1997,7 +2199,7 @@ if exist "3ds_portlibs" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-zlib ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Portlibs-zlib ^(Release^)...
 make zlib
 make install-zlib
@@ -2029,7 +2231,7 @@ if exist "3ds_portlibs" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-Zlib ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Portlibs-zlib ^(Release^)...
 make zlib
 Title = Building Portlibs-zlib ^(Done^)
@@ -2060,7 +2262,7 @@ if exist "3ds_portlibs" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-FreeType2 ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Portlibs-FreeType2 ^(Release^)...
 make freetype
 make install
@@ -2092,7 +2294,7 @@ if exist "3ds_portlibs" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-FreeType2 ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Portlibs-FreeType2 ^(Release^)...
 make freetype
 Title = Building Portlibs-FreeType2 ^(Done^)
@@ -2123,7 +2325,7 @@ if exist "3ds_portlibs" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-LibPNG ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Portlibs-LibPNG ^(Release^)...
 make libpng
 make install
@@ -2155,7 +2357,7 @@ if exist "3ds_portlibs" (
 set PATH=c:\Python27\;%PATH%
 echo Building...
 Title = Building Portlibs-LibPNG ^(Clean^)...
-make clean
+git clean -fxd
 Title = Building Portlibs-LibPNG ^(Release^)...
 make libpng
 Title = Building Portlibs-LibPNG ^(Done^)
@@ -2203,11 +2405,17 @@ if exist "sf2dlib" (
     git clone --recursive https://github.com/xerpi/sf2dlib.git
     cd sf2dlib
 )
-cd libsf2d
+Title = Building sf2dlib ^(Clean^)...
+git clean -fxd
+cls
+echo Go to [sf2dlib/libsf2d/source/sf2d_texture.c]
+echo Open and change [TEX_MIN_SIZE 32] to [TEX_MIN_SIZE 64]
+echo Save then press "enter"
+Pause >nul
+cls
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building sf2dlib ^(Clean^)...
-make clean
+cd libsf2d
 Title = Building sf2dlib ^(Release^)...
 make install
 Title = Building sf2dlib ^(Done^)
@@ -2236,11 +2444,17 @@ if exist "sf2dlib" (
     git clone --recursive https://github.com/xerpi/sf2dlib.git
     cd sf2dlib
 )
-cd libsf2d
+Title = Building sf2dlib ^(Clean^)...
+git clean -fxd
+cls
+echo Go to [sf2dlib/libsf2d/source/sf2d_texture.c]
+echo Open and change [TEX_MIN_SIZE 32] to [TEX_MIN_SIZE 64]
+echo Save then press "enter"
+Pause >nul
+cls
 set PATH=c:\Python27\;%PATH%
 echo Building...
-Title = Building sf2dlib ^(Clean^)...
-make clean
+cd libsf2d
 Title = Building sf2dlib ^(Release^)...
 make
 Title = Building sf2dlib ^(Done^)
@@ -2289,11 +2503,11 @@ if exist "sftdlib" (
     git clone --recursive https://github.com/xerpi/sftdlib
     cd sftdlib
 )
-cd libsftd
 set PATH=c:\Python27\;%PATH%
+cd libsftd
 echo Building...
 Title = Installing sftdlib ^(Clean^)...
-make clean
+git clean -fxd
 Title = Installing sftdlib ^(Release^)...
 make install
 Title = Installing sftdlib ^(Done^)
@@ -2322,11 +2536,11 @@ if exist "sftdlib" (
     git clone --recursive https://github.com/xerpi/sftdlib
     cd sftdlib
 )
-cd libsftd
 set PATH=c:\Python27\;%PATH%
+cd libsftd
 echo Building...
 Title = Installing sftdlib ^(Clean^)...
-make clean
+git clean -fxd
 Title = Installing sftdlib ^(Release^)...
 make
 Title = Installing sftdlib ^(Done^)
